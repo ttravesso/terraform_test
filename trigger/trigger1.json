@@ -16,7 +16,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/copy/blobs/copy/",
+			"blobPathBeginsWith": "/copy/blobs/",
 			"blobPathEndsWith": ".csv",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/6ff4ba06-5b53-4b82-b31c-ece94622dadc/resourceGroups/RG-IAC/providers/Microsoft.Storage/storageAccounts/stoterraformst",
