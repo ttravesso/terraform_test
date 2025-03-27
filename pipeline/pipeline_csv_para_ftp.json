@@ -1,0 +1,188 @@
+{
+	"name": "pipeline_csv_para_ftp",
+	"properties": {
+		"activities": [
+			{
+				"name": "SetarDataExecucao",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "dataExecucao",
+					"value": "@substring(pipeline().parameters.nomeCsv, 0, 8)"
+				}
+			},
+			{
+				"name": "BuscarListaDeArquivos",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "SetarDataExecucao",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "LoopArquivos",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "BuscarListaDeArquivos",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('BuscarListaDeArquivos').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "CopiarArquivoParaFTP",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "SftpWriteSettings",
+										"operationTimeout": "01:00:00",
+										"useTempFileRename": true
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_arquivo_blob",
+									"type": "DatasetReference",
+									"parameters": {
+										"filePath": {
+											"value": "@item().filePath",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_arquivo_ftp",
+									"type": "DatasetReference",
+									"parameters": {
+										"ftpPath": {
+											"value": "@if(\n  endsWith(item().filePath, '.bak'),\n  concat(variables('dataExecucao'), '/db_', variables('dataExecucao'), '.bak'),\n  concat(variables('dataExecucao'), '/imagens/', last(split(item().filePath, '/')))\n)",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "DeletarArquivoDump",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "LoopArquivos",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_arquivo_blob",
+						"type": "DatasetReference",
+						"parameters": {
+							"filePath": {
+								"value": "@concat('dumps/db_', variables('dataExecucao'), '.bak')",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"parameters": {
+			"nomeCsv": {
+				"type": "string",
+				"defaultValue": "20250327.csv"
+			}
+		},
+		"variables": {
+			"dataExecucao": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
