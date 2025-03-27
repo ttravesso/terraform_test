@@ -164,7 +164,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"filePath": {
-								"value": "@concat('dumps/db_', variables('dataExecucao'), '.bak')",
+								"value": "@concat('db_', variables('dataExecucao'), '.bak')",
 								"type": "Expression"
 							}
 						}
