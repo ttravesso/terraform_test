@@ -567,7 +567,7 @@
 							{
 								"activity": "RegistrarErroBak",
 								"dependencyConditions": [
-									"Failed"
+									"Succeeded"
 								]
 							}
 						],
