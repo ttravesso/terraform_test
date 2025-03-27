@@ -7,15 +7,18 @@
 		},
 		"parameters": {
 			"ftpPath": {
-				"type": "string",
-				"defaultValue": "@dataset().ftpPath"
+				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation"
+				"type": "SftpLocation",
+				"folderPath": {
+					"value": "@dataset().ftpPath",
+					"type": "Expression"
+				}
 			}
 		}
 	},
