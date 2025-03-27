@@ -25,7 +25,7 @@
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
 			"type": "string",
-			"defaultValue": "@last(split(triggerBody()['subject'], '/'))"
+			"defaultValue": "@last(split(triggerOutputs()['body']['subject'], '/'))"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
