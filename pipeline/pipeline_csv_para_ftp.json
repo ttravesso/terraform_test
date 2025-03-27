@@ -313,7 +313,7 @@
 				"typeProperties": {
 					"variableName": "erroMensagem",
 					"value": {
-						"value": "@concat('Arquivo .bak não encontrado: db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak')\n",
+						"value": "@concat('Arquivo BAK não encontrado: db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak. \nA execução do pipeline foi interrompida antes da cópia de arquivos.')",
 						"type": "Expression"
 					}
 				}
@@ -364,7 +364,7 @@
 					},
 					"url": "https://prod-30.brazilsouth.logic.azure.com:443/workflows/68490f5443c44e6992ebce7f0dd81958/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=GIz7HdCagxTF9ssvU0foqI9OkNi-xwf55LV_VcGlfmc",
 					"body": {
-						"mensagem": "Falha na execução da pipeline CSV para FTP.",
+						"mensagem": "Falha crítica: arquivo .bak ausente",
 						"detalhes": "@variables('erroMensagem')",
 						"runId": "@pipeline().RunId"
 					}
