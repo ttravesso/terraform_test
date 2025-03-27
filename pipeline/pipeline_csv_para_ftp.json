@@ -189,6 +189,10 @@
 			"nomeCsv": {
 				"type": "string",
 				"defaultValue": "@last(split(triggerBody()?['subject'], '/'))"
+			},
+			"triggerInvalido": {
+				"type": "string",
+				"defaultValue": "VALOR_INVALIDO"
 			}
 		},
 		"variables": {
