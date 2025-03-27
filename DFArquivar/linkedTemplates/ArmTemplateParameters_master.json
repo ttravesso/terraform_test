@@ -15,7 +15,7 @@
 			"value": "eu-central-1.sftpcloud.io"
 		},
 		"Sftp1_properties_typeProperties_userName": {
-			"value": "cc38cadebe2c4ce9a290a6ebdf6b5955"
+			"value": "96697a8271b740baa612f2779576ed2c"
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
 			"value": "@triggerBody().fileName"
