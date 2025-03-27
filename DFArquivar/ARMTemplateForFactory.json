@@ -76,7 +76,9 @@
 							"dataset": {
 								"referenceName": "DelimitedText1",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"fileName": "@pipeline().parameters.nomeCsv"
+								}
 							},
 							"firstRowOnly": false
 						}
@@ -286,7 +288,9 @@
 							"dataset": {
 								"referenceName": "DelimitedText1",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"fileName": "@pipeline().parameters.nomeCsv"
+								}
 							},
 							"firstRowOnly": false
 						}
@@ -448,12 +452,20 @@
 					"referenceName": "AzureBlobStorage1",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"fileName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "filepath.csv",
+						"fileName": {
+							"value": "@dataset().fileName",
+							"type": "Expression"
+						},
 						"container": "copy"
 					},
 					"columnDelimiter": ",",
