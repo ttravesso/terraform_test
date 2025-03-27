@@ -426,7 +426,7 @@
 				"parameters": {
 					"nomeCsv": {
 						"type": "string",
-						"defaultValue": "20250327.csv"
+						"defaultValue": "@last(split(triggerBody()?['subject'], '/'))"
 					}
 				},
 				"variables": {
@@ -597,7 +597,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/copy/blobs/",
+					"blobPathBeginsWith": "",
 					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
