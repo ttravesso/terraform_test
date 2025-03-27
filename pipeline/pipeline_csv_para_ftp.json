@@ -190,25 +190,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "SetarDataExecucao",
-						"dependencyConditions": [
-							"Failed"
-						]
-					},
-					{
-						"activity": "BuscarListaDeArquivos",
-						"dependencyConditions": [
-							"Failed"
-						]
-					},
-					{
 						"activity": "LoopArquivos",
-						"dependencyConditions": [
-							"Failed"
-						]
-					},
-					{
-						"activity": "DeletarArquivoDump",
 						"dependencyConditions": [
 							"Failed"
 						]
