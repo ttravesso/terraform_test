@@ -10,7 +10,7 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"nomeCsv": "@if(equals(triggerOutputs()?['body']?['subject'], null), pipeline().parameters.triggerInvalido, last(split(triggerOutputs()['body']['subject'], '/')))"
+					"nomeCsv": "@last(split(triggerOutputs()['body']['subject'], '/'))"
 				}
 			}
 		],
