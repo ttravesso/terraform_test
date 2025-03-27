@@ -25,7 +25,7 @@
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
 			"type": "string",
-			"defaultValue": "20250327.csv"
+			"defaultValue": "@if(equals(triggerBody()?['subject'], null), 'teste.csv', last(split(triggerBody()['subject'], '/')))"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",

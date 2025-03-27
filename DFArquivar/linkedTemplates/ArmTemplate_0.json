@@ -25,7 +25,7 @@
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
 			"type": "string",
-			"defaultValue": "20250327.csv"
+			"defaultValue": "@if(equals(triggerBody()?['subject'], null), 'teste.csv', last(split(triggerBody()['subject'], '/')))"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -533,7 +533,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"filePath": {
-										"value": "@concat('dumps/db_', variables('dataExecucao'), '.bak')",
+										"value": "@concat('db_', variables('dataExecucao'), '.bak')",
 										"type": "Expression"
 									}
 								}
@@ -597,7 +597,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/copy/blobs/",
+					"blobPathBeginsWith": "/copy/blobs/copy/",
 					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
