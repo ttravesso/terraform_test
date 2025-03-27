@@ -648,12 +648,6 @@
 								"dependencyConditions": [
 									"Failed"
 								]
-							},
-							{
-								"activity": "EncerrarComErro",
-								"dependencyConditions": [
-									"Failed"
-								]
 							}
 						],
 						"policy": {
@@ -752,6 +746,38 @@
 								"type": "Expression"
 							},
 							"errorCode": "404"
+						}
+					},
+					{
+						"name": "Web1_copy1",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "EncerrarComErro",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"url": "https://prod-30.brazilsouth.logic.azure.com:443/workflows/68490f5443c44e6992ebce7f0dd81958/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=GIz7HdCagxTF9ssvU0foqI9OkNi-xwf55LV_VcGlfmc",
+							"body": {
+								"mensagem": "Falha na execução da pipeline CSV para FTP.",
+								"detalhes": "@variables('erroMensagem')",
+								"runId": "@pipeline().RunId"
+							}
 						}
 					}
 				],
