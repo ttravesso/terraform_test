@@ -396,6 +396,26 @@
 											"type": "Expression"
 										}
 									}
+								},
+								{
+									"name": "ForcarFalha",
+									"type": "Fail",
+									"dependsOn": [
+										{
+											"activity": "RegistrarErroCopia",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"message": {
+											"value": "@variables('erroMensagem')",
+											"type": "Expression"
+										},
+										"errorCode": "FalhaCopiaArquivo"
+									}
 								}
 							]
 						}
@@ -430,17 +450,10 @@
 									}
 								}
 							},
-							"logStorageSettings": {
-								"linkedServiceName": {
-									"referenceName": "AzureBlobStorage1",
-									"type": "LinkedServiceReference"
-								},
-								"path": "log"
-							},
-							"enableLogging": true,
+							"enableLogging": false,
 							"storeSettings": {
 								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
+								"recursive": false,
 								"enablePartitionDiscovery": false
 							}
 						}
@@ -452,8 +465,7 @@
 							{
 								"activity": "LoopArquivos",
 								"dependencyConditions": [
-									"Failed",
-									"Succeeded"
+									"Failed"
 								]
 							}
 						],
@@ -505,7 +517,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
 				"[concat(variables('factoryId'), '/datasets/ds_arquivo_blob')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
 				"[concat(variables('factoryId'), '/datasets/ds_arquivo_ftp')]"
 			]
 		},
