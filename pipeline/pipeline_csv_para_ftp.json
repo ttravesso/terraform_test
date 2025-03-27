@@ -287,9 +287,12 @@
 							"filePath": "@concat('db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak')"
 						}
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -315,7 +318,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "erroMensagem",
-					"value": "@concat('Arquivo .bak não encontrado: db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak')\n"
+					"value": {
+						"value": "@concat('Arquivo .bak não encontrado: db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak')\n",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -331,7 +337,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"message": "@variables('erroMensagem')",
+					"message": {
+						"value": "@variables('erroMensagem')",
+						"type": "Expression"
+					},
 					"errorCode": "404"
 				}
 			}
