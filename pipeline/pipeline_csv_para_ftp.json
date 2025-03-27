@@ -13,7 +13,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "dataExecucao",
-					"value": "@substring(pipeline().parameters.nomeCsv, 0, 8)"
+					"value": {
+						"value": "@substring(pipeline().parameters.nomeCsv, 0, 8)",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -162,6 +165,13 @@
 								"type": "Expression"
 							}
 						}
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"path": "log"
 					},
 					"enableLogging": true,
 					"storeSettings": {
