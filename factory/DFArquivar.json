@@ -1,0 +1,9 @@
+{
+	"name": "DFArquivar",
+	"location": "brazilsouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "52e841d7-3298-4aa7-bc7f-76502a93963f",
+		"tenantId": "2d80b47d-6616-438f-a881-a5dfaae3612c"
+	}
+}

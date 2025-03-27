@@ -1,0 +1,23 @@
+{
+	"name": "ds_arquivo_ftp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Sftp1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ftpPath": {
+				"type": "string",
+				"defaultValue": "@dataset().ftpPath"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

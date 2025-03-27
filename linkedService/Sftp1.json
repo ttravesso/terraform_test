@@ -1,0 +1,16 @@
+{
+	"name": "Sftp1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Sftp",
+		"typeProperties": {
+			"host": "eu-central-1.sftpcloud.io",
+			"port": 22,
+			"skipHostKeyValidation": true,
+			"authenticationType": "Basic",
+			"userName": "5622d10c170346fa945b83830e566f0f",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQENFRjQ5MUFBLTQwNjgtNDkyMy1BOTVCLTRCQTlFMzg0OUM4RV8wNTkyN2RlYy0yNGU1LTQwNjgtODhmYy1iZDY0ZDljOTIzMWQiDQp9"
+		}
+	}
+}
