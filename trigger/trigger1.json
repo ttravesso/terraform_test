@@ -10,7 +10,7 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"nomeCsv": "@if(equals(triggerBody()?['subject'], null), 'teste.csv', last(split(triggerBody()['subject'], '/')))"
+					"nomeCsv": "@last(split(triggerBody()['subject'], '/'))"
 				}
 			}
 		],
