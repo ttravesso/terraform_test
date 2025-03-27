@@ -452,7 +452,8 @@
 							{
 								"activity": "LoopArquivos",
 								"dependencyConditions": [
-									"Failed"
+									"Failed",
+									"Succeeded"
 								]
 							}
 						],
