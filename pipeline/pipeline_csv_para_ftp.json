@@ -5,7 +5,14 @@
 			{
 				"name": "SetarDataExecucao",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "VerificarArquivoBak",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
@@ -174,7 +181,10 @@
 							],
 							"userProperties": [],
 							"typeProperties": {
-								"message": "@variables('erroMensagem')",
+								"message": {
+									"value": "@variables('erroMensagem')",
+									"type": "Expression"
+								},
 								"errorCode": "FalhaCopiaArquivo"
 							}
 						}
@@ -228,6 +238,12 @@
 						"dependencyConditions": [
 							"Failed"
 						]
+					},
+					{
+						"activity": "EncerrarComErro",
+						"dependencyConditions": [
+							"Failed"
+						]
 					}
 				],
 				"policy": {
@@ -249,6 +265,74 @@
 						"detalhes": "@variables('erroMensagem')",
 						"runId": "@pipeline().RunId"
 					}
+				}
+			},
+			{
+				"name": "VerificarArquivoBak",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_arquivo_bak_check",
+						"type": "DatasetReference",
+						"parameters": {
+							"filePath": "@concat('db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak')"
+						}
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			},
+			{
+				"name": "RegistrarErroBak",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "VerificarArquivoBak",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "erroMensagem",
+					"value": "@concat('Arquivo .bak não encontrado: db_', substring(pipeline().parameters.nomeCsv, 0, 8), '.bak')\n"
+				}
+			},
+			{
+				"name": "EncerrarComErro",
+				"type": "Fail",
+				"dependsOn": [
+					{
+						"activity": "RegistrarErroBak",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"message": "@variables('erroMensagem')",
+					"errorCode": "404"
 				}
 			}
 		],
