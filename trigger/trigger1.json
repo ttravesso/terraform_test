@@ -10,7 +10,7 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"nomeCsv": "@last(split(triggerOutputs()['body']['subject'], '/'))"
+					"nomeCsv": "@if(contains(string(triggerOutputs()), 'subject'), last(split(triggerOutputs()['body']['subject'], '/')), fail('Trigger inválido: evento sem subject'))"
 				}
 			}
 		],
