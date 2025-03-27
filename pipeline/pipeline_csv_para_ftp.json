@@ -188,7 +188,7 @@
 		"parameters": {
 			"nomeCsv": {
 				"type": "string",
-				"defaultValue": "20250327.csv"
+				"defaultValue": "@last(split(triggerBody()?['subject'], '/'))"
 			}
 		},
 		"variables": {
