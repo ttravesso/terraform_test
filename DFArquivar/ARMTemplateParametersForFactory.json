@@ -18,7 +18,7 @@
 			"value": "987ef6ded0d64ad19e53fca7612736e7"
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
-			"value": "@last(split(triggerOutputs()['body']['subject'], '/'))"
+			"value": "@if(contains(string(triggerOutputs()), 'subject'), last(split(triggerOutputs()['body']['subject'], '/')), fail('Trigger inválido: evento sem subject'))"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/6ff4ba06-5b53-4b82-b31c-ece94622dadc/resourceGroups/RG-IAC/providers/Microsoft.Storage/storageAccounts/stoterraformst"
