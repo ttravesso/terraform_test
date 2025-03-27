@@ -25,7 +25,7 @@
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
 			"type": "string",
-			"defaultValue": "@if(contains(string(triggerOutputs()), 'subject'), last(split(triggerOutputs()['body']['subject'], '/')), fail('Trigger inválido: evento sem subject'))"
+			"defaultValue": "@if(equals(triggerOutputs()?['body']?['subject'], null), pipeline().parameters.triggerInvalido, last(split(triggerOutputs()['body']['subject'], '/')))"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -427,6 +427,10 @@
 					"nomeCsv": {
 						"type": "string",
 						"defaultValue": "@last(split(triggerBody()?['subject'], '/'))"
+					},
+					"triggerInvalido": {
+						"type": "string",
+						"defaultValue": "VALOR_INVALIDO"
 					}
 				},
 				"variables": {
