@@ -372,6 +372,30 @@
 											}
 										}
 									]
+								},
+								{
+									"name": "RegistrarErroCopia",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "CopiarArquivoParaFTP",
+											"dependencyConditions": [
+												"Failed"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "erroMensagem",
+										"value": {
+											"value": "@concat('Erro na cópia do arquivo: ', item().filePath, ' | Erro: ', activity('CopiarArquivoParaFTP').error.message)",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -450,30 +474,6 @@
 								"mensagem": "Falha na execução da pipeline CSV para FTP.",
 								"detalhes": "@variables('erroMensagem')",
 								"runId": "@pipeline().RunId"
-							}
-						}
-					},
-					{
-						"name": "Set variable1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "LoopArquivos",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "erroMensagem",
-							"value": {
-								"value": "@concat('Atividade: CopiarArquivoParaFTP | Erro: ', activity('CopiarArquivoParaFTP').error.message)\n",
-								"type": "Expression"
 							}
 						}
 					}
