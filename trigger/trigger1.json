@@ -10,7 +10,7 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"nomeCsv": "\"@last(split(triggerBody()['subject'], '/'))\""
+					"nomeCsv": "@last(split(triggerBody()['subject'], '/'))"
 				}
 			}
 		],
