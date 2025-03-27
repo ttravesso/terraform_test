@@ -10,7 +10,7 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"nomeCsv": "@last(split(triggerBody()['subject'], '/'))"
+					"nomeCsv": "20250327.csv"
 				}
 			}
 		],
