@@ -21,7 +21,7 @@
 		},
 		"Sftp1_properties_typeProperties_userName": {
 			"type": "string",
-			"defaultValue": "987ef6ded0d64ad19e53fca7612736e7"
+			"defaultValue": "5e000c759c894d20be0472299f80443b"
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
 			"type": "string",
