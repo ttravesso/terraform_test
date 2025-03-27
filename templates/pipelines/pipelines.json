@@ -1,6 +1,5 @@
 {
 	"name": "TriggerBlobCreatedCSV",
-	"type": "Microsoft.DataFactory/factories/triggers",
 	"properties": {
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
