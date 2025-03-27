@@ -18,7 +18,7 @@
 			"value": "5622d10c170346fa945b83830e566f0f"
 		},
 		"trigger1_properties_pipeline_csv_para_ftp_parameters_nomeCsv": {
-			"value": "@last(split(triggerBody()['subject'], '/'))"
+			"value": "20250327.csv"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/6ff4ba06-5b53-4b82-b31c-ece94622dadc/resourceGroups/RG-IAC/providers/Microsoft.Storage/storageAccounts/stoterraformst"
