@@ -155,7 +155,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "erroMensagem",
-								"value": "@concat('Erro na cópia do arquivo: ', item().filePath, ' | Erro: ', activity('CopiarArquivoParaFTP').error.message)"
+								"value": {
+									"value": "@concat('Erro na cópia do arquivo: ', item().filePath, ' | Erro: ', activity('CopiarArquivoParaFTP').error.message)",
+									"type": "Expression"
+								}
 							}
 						}
 					]
@@ -213,7 +216,8 @@
 					{
 						"activity": "LoopArquivos",
 						"dependencyConditions": [
-							"Failed"
+							"Failed",
+							"Succeeded"
 						]
 					}
 				],
