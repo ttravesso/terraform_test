@@ -107,9 +107,10 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"ftpPath": {
-											"value": "@if(\n  endsWith(item().filePath, '.bak'),\n  concat(variables('dataExecucao'), '/db_', variables('dataExecucao'), '.bak'),\n  concat(variables('dataExecucao'), '/imagens/', last(split(item().filePath, '/')))\n)",
+											"value": "@if(endsWith(item().filePath, '.bak'), concat(variables('dataExecucao'), ''), concat(variables('dataExecucao'), '/imagens'))",
 											"type": "Expression"
-										}
+										},
+										"fileName": "@last(split(item().filePath, '/'))"
 									}
 								}
 							]
