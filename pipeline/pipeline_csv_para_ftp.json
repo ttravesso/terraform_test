@@ -160,6 +160,23 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "ForcarFalha",
+							"type": "Fail",
+							"dependsOn": [
+								{
+									"activity": "RegistrarErroCopia",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "@variables('erroMensagem')",
+								"errorCode": "FalhaCopiaArquivo"
+							}
 						}
 					]
 				}
@@ -194,17 +211,10 @@
 							}
 						}
 					},
-					"logStorageSettings": {
-						"linkedServiceName": {
-							"referenceName": "AzureBlobStorage1",
-							"type": "LinkedServiceReference"
-						},
-						"path": "log"
-					},
-					"enableLogging": true,
+					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
+						"recursive": false,
 						"enablePartitionDiscovery": false
 					}
 				}
@@ -216,8 +226,7 @@
 					{
 						"activity": "LoopArquivos",
 						"dependencyConditions": [
-							"Failed",
-							"Succeeded"
+							"Failed"
 						]
 					}
 				],
