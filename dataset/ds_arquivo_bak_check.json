@@ -15,7 +15,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "@dataset().filePath"
+				"fileName": "@dataset().filePath",
+				"container": "tfstate"
 			}
 		}
 	}
