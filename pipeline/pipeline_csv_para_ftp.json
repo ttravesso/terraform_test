@@ -282,7 +282,7 @@
 						}
 					},
 					"fieldList": [
-						"childItems"
+						"exists"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
